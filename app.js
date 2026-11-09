@@ -15,11 +15,11 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const cors=require("cors");
-const corsOptions ={
-   origin:'*', 
-   credentials:true,            //access-control-allow-credentials:true
-   optionSuccessStatus:200,
+const cors = require("cors");
+const corsOptions = {
+    origin: '*',
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
 }
 
 app.use(cors(corsOptions)) // Use this after the variable declaration
@@ -28,35 +28,35 @@ app.use(cors(corsOptions)) // Use this after the variable declaration
 // using morgan for logs
 app.use(morgan('combined'));
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const supabase = 
-    supabaseClient.createClient('https://minhaurl', 
-        'minhaAPIKey')
+const supabase =
+    supabaseClient.createClient('https://vxbiqonjqcurtyzigelo.supabase.co/rest/v1/',
+        'sb_publishable_a7tcZYhznNbYHslVDJlzpQ_GMMDzYaU')
 
 
-app.get('/products', async (req, res) => {
-    const {data, error} = await supabase
+app.get('/products', async(req, res) => {
+    const { data, error } = await supabase
         .from('products')
         .select()
     res.send(data);
     console.log(`lists all products${data}`);
 });
 
-app.get('/products/:id', async (req, res) => {
+app.get('/products/:id', async(req, res) => {
     console.log("id = " + req.params.id);
-    const {data, error} = await supabase
+    const { data, error } = await supabase
         .from('products')
         .select()
         .eq('id', req.params.id)
     res.send(data);
 
-    console.log("retorno "+ data);
+    console.log("retorno " + data);
 });
 
-app.post('/products', async (req, res) => {
-    const {error} = await supabase
+app.post('/products', async(req, res) => {
+    const { error } = await supabase
         .from('products')
         .insert({
             name: req.body.name,
@@ -67,14 +67,14 @@ app.post('/products', async (req, res) => {
         res.send(error);
     }
     res.send("created!!");
-    console.log("retorno "+ req.body.name);
-    console.log("retorno "+ req.body.description);
-    console.log("retorno "+ req.body.price);
+    console.log("retorno " + req.body.name);
+    console.log("retorno " + req.body.description);
+    console.log("retorno " + req.body.price);
 
 });
 
-app.put('/products/:id', async (req, res) => {
-    const {error} = await supabase
+app.put('/products/:id', async(req, res) => {
+    const { error } = await supabase
         .from('products')
         .update({
             name: req.body.name,
@@ -88,9 +88,9 @@ app.put('/products/:id', async (req, res) => {
     res.send("updated!!");
 });
 
-app.delete('/products/:id', async (req, res) => {
+app.delete('/products/:id', async(req, res) => {
     console.log("delete: " + req.params.id);
-    const {error} = await supabase
+    const { error } = await supabase
         .from('products')
         .delete()
         .eq('id', req.params.id)
@@ -106,7 +106,7 @@ app.get('/', (req, res) => {
     res.send("Hello I am working my friend Supabase <3");
 });
 
-app.get('*', (req, res) => {
+app.get('*path', (req, res) => {
     res.send("Hello again I am working my friend to the moon and behind <3");
 });
 
