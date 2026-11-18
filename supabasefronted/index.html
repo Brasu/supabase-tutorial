@@ -2,36 +2,63 @@
 <html>
 <head>
   <title>Product CRUD</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link
+    rel = "stylesheet"
+    type = "text/css"
+    href = "style.css"
+  >
 </head>
 <body>
   <h1>Product CRUD</h1>
 
-  <form id="add-product-form">
-    <h2>Add Product</h2>
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-    <label for="price">Price:</label>
-    <input type="number" id="price" name="price" required step="0.01">
-    <button type="submit">Add</button>
+  <form id = "add-product-form">
+    <h2>Product</h2>
+    <input
+      type = "hidden"
+      id = "id"
+      name = "id"
+    >
+    <label for = "name">Name:</label>
+    <input
+      type = "text"
+      id = "name"
+      name = "name"
+      required
+    >
+    <label for = "price">Price:</label>
+    <input
+      type = "number"
+      id = "price"
+      name = "price"
+      required
+      step = "0.01"
+    >
+    <label for = "description">description:</label>
+    <input
+      type = "text"
+      id = "description"
+      name = "description"
+    >
+    <button type = "submit">Save</button>
+    <button type = "reset">Cancel</button>
   </form>
 
-   <table id="products">
-     <thead>
-       <tr>
-         <th>ID</th>
-         <th>Nome</th>
-         <th>Descrição</th>
-         <th>Preço</th>
-       </tr>
-     </thead>
-     <tbody></tbody>
-   </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Pre&ccedil;o</th>
+        <th>Descri&ccedil;&atilde;o</th>
+        <th>A&ccedil;&otilde;es</th>
+      </tr>
+    </thead>
+    <tbody id = "products"></tbody>
+  </table>
 
-  <script src="app.js"></script>
+  <script src = "app.js"></script>
   <script>
-    // Call fetchProducts() when the page loads
-    window.addEventListener('load', fetchProducts);
+  // Call fetchProducts() when the page loads
+  window.addEventListener("load", fetchProducts);
   </script>
 </body>
 </html>
